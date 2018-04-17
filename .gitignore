@@ -102,3 +102,6 @@ ENV/
 
 # idea files
 .idea/
+
+#config
+secret_config.py
