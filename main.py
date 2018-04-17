@@ -13,6 +13,12 @@ def index():
 
 # тест соединения
 cnx = mysql.connector.connect(user=secret_config.user, password=secret_config.password,
-                              host=secret_config.host)
+                              host=secret_config.host, database=secret_config.database)
+cursor = cnx.cursor()
+cursor.execute("SELECT VKID FROM Users")
+
+for (VKID) in cursor:
+    print("{}".format(VKID))
+
 cnx.close()
 app.run(debug=True)
