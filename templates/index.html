@@ -3,10 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Опа, статистика!</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+        function drawChart()
+        {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Topping');
+            data.addColumn('number', 'Slices');
+            data.addRows([
+              ['Репосты без текста', {{no_text}} ],
+              ['Репосты с текстом', {{with_text}}],
+            ]);
+            var options = {'title':'Че там по репостам?',
+                           'width':1000,
+                           'height':1000};
+            var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        }
+    </script>
 </head>
 <body>
-    <div>
-        А вот и заголовок
-    </div>
+<div style="text-align: center">
+    Так-с, так-с, че тут у нас?
+</div>
+<div style="text-align: center">
+    Срденяя длинна сообщения: {{avg_text}}
+</div>
+<div id="chart_div"></div>
 </body>
 </html>

@@ -8,17 +8,20 @@ app = Flask(__name__)
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template("index.html")
+    cnx = mysql.connector.connect(user=secret_config.user, password=secret_config.password,
+                                  host=secret_config.host, database=secret_config.database)
+    cursor = cnx.cursor()
+    cursor.execute("SELECT Text FROM Reposts")
+    lng = 0
+    cnt = 0
+    cnt_empty = 0
+    for (Text) in cursor:
+        lng += len(Text[0])
+        if len(Text[0]) == 0:
+            cnt_empty += 1
+        cnt += 1
+    cnx.close()
+    return render_template("index.html", avg_text=lng / cnt, with_text=cnt - cnt_empty, no_text=cnt_empty)
 
 
-# тест соединения
-cnx = mysql.connector.connect(user=secret_config.user, password=secret_config.password,
-                              host=secret_config.host, database=secret_config.database)
-cursor = cnx.cursor()
-cursor.execute("SELECT VKID FROM Users")
-
-for (VKID) in cursor:
-    print("{}".format(VKID))
-
-cnx.close()
 app.run(debug=True)
