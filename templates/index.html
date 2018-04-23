@@ -22,15 +22,32 @@
             var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
             chart.draw(data, options);
         }
+
     </script>
 </head>
 <body>
 <div style="text-align: center">
     Так-с, так-с, че тут у нас?
+    <div>
+        Всего сообщений: {{cnt}}
+    </div>
+    <div>
+        Срденяя длинна сообщения: {{avg_text}}
+    </div>
+    <div>
+        Самая частая длинна сообщения: {{md_text}}
+    </div>
+    <div>
+        Дисперсия длинны сообщений: {{d_text}}
+    </div>
+    <div>
+        Наименьшая длинна сообщения: {{min_text}}
+    </div>
+    <div>
+        Наибольшая длинна сообщения: {{max_text}}
+    </div>
 </div>
-<div style="text-align: center">
-    Срденяя длинна сообщения: {{avg_text}}
-</div>
+
 <div id="chart_div"></div>
 </body>
 </html>
